@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تمريض النساء والتوليد التفاعلي | جامعة اللوتس</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            user-select: none;
+        }
+        .en-text {
+            font-family: 'Inter', sans-serif;
+            direction: ltr;
+            text-align: left;
+        }
+        .option-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-card:hover {
+            border-color: #6366f1;
+            background-color: #f5f3ff;
+        }
+        .option-selected {
+            border-color: #4f46e5 !important;
+            background-color: #eef2ff !important;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+        .grid-btn {
+            transition: all 0.15s ease;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-l from-indigo-900 via-indigo-800 to-blue-900 text-white shadow-lg sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center font-extrabold text-lg border border-white/20 shadow-inner">
+                    LU
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg leading-tight">اختبار تمريض النساء والتوليد (OGN3513)</h1>
+                    <p class="text-xs text-indigo-200">كلية التمريض - جامعة اللوتس بالمنيا | د. أمل أحمد عبد الحافظ</p>
+                </div>
+            </div>
+            <button id="homeBtn" onclick="confirmReturnHome()" class="hidden bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold py-2 px-3.5 rounded-xl border border-white/20 transition flex items-center gap-1.5">
+                <span>الرئيسية</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
+
+        <!-- 1. Start / Lecture Selection Screen -->
+        <section id="startScreen" class="space-y-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 text-center space-y-3">
+                <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
+                    Obstetrics Interactive Exam Mode
+                </span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">اختر المحاضرة لبدء الامتحان التفاعلي</h2>
+                <p class="text-slate-600 text-sm max-w-2xl mx-auto leading-relaxed">
+                    يعمل هذا الاختبار بنظام الامتحان الحقيقي؛ يمكنك اختيار إجابتك والتنقل بحرية بين الأسئلة وتعديل اختياراتك في أي وقت قبل تسليم الامتحان، ولن تظهر الدرجة أو الإجابات الصحيحة إلا بعد الضغط على زر <strong>«إنهاء الاختبار»</strong>.
+                </p>
+            </div>
+
+            <!-- Lecture Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Lecture 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-lg border border-blue-200">المحاضرة الأولى</span>
+                            <span class="text-xs font-semibold text-slate-500">40 سؤالاً</span>
+                        </div>
+                        <h3 class="en-text font-bold text-lg text-slate-800">1. Diagnosis of Pregnancy</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            تشمل حسابات العمر الحملي بالأسابيع، قاعدة نيجل، GTPAL، وعلامات الحمل (Presumptive, Probable, Positive).
+                        </p>
+                        <div class="flex gap-2 pt-1">
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 MCQ</span>
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 True / False</span>
+                        </div>
+                    </div>
+                    <button onclick="startQuiz('lec1')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm">
+                        ابدأ امتحان المحاضرة (40 سؤال)
+                    </button>
+                </div>
+
+                <!-- Lecture 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-lg border border-emerald-200">المحاضرة الثانية</span>
+                            <span class="text-xs font-semibold text-slate-500">40 سؤالاً</span>
+                        </div>
+                        <h3 class="en-text font-bold text-lg text-slate-800">2. Physiological Changes During Pregnancy</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            تشمل التغيرات الفسيولوجية في الجهاز التناسلي، الثدي، الجلد، الدم، القلب والأوعية، الجهاز التنفسي، الهضمي، والبولي.
+                        </p>
+                        <div class="flex gap-2 pt-1">
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 MCQ</span>
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 True / False</span>
+                        </div>
+                    </div>
+                    <button onclick="startQuiz('lec2')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm">
+                        ابدأ امتحان المحاضرة (40 سؤال)
+                    </button>
+                </div>
+
+                <!-- Lecture 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-lg border border-rose-200">المحاضرة الثالثة</span>
+                            <span class="text-xs font-semibold text-slate-500">40 سؤالاً</span>
+                        </div>
+                        <h3 class="en-text font-bold text-lg text-slate-800">3. Bleeding in Early Pregnancy</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            تشمل أسباب النزيف المبكر، أنواع الإجهاض وعلاجها التمريضي، الحمل خارج الرحم (Ectopic)، والحمل العنقودي (Hydatidiform Mole).
+                        </p>
+                        <div class="flex gap-2 pt-1">
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 MCQ</span>
+                            <span class="text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">20 True / False</span>
+                        </div>
+                    </div>
+                    <button onclick="startQuiz('lec3')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm">
+                        ابدأ امتحان المحاضرة (40 سؤال)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Comprehensive Exam Banner -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="space-y-1 text-center sm:text-right">
+                    <div class="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">
+                        <span>امتحان شامل</span>
+                        <span>•</span>
+                        <span>120 سؤالاً</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">الاختبار المجمع للمحاضرات الثلاث معاً</h3>
+                    <p class="text-xs sm:text-sm text-slate-300">يضم جميع أسئلة الاختيار من متعدد (60 MCQ) وأسئلة الصح والخطأ (60 True/False) في جلسة امتحانية واحدة.</p>
+                </div>
+                <button onclick="startQuiz('all')" class="w-full sm:w-auto shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3 px-6 rounded-xl transition shadow">
+                    ابدأ الامتحان الشامل (120 سؤال)
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. Active Quiz Screen -->
+        <section id="quizScreen" class="hidden space-y-5">
+            <!-- Top Progress & Info Card -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <span id="lectureBadge" class="en-text text-xs font-bold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg border border-indigo-200"></span>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs sm:text-sm font-bold text-slate-700">
+                        <span id="questionCounter">السؤال 1 من 40</span>
+                        <span class="text-slate-300">|</span>
+                        <span id="answeredCounter" class="text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">تمت الإجابة: 0</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar (Shows current question position only without revealing score) -->
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="bg-indigo-600 h-full transition-all duration-300" style="width: 2.5%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <span id="questionTypeBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700"></span>
+                    <button onclick="clearCurrentSelection()" id="clearSelectionBtn" class="hidden text-xs text-rose-600 hover:text-rose-700 font-semibold">
+                        إلغاء تحديد الإجابة
+                    </button>
+                </div>
+
+                <!-- English Question Text -->
+                <div id="questionText" class="en-text text-base sm:text-lg font-semibold text-slate-800 leading-relaxed"></div>
+
+                <!-- Options Container -->
+                <div id="optionsContainer" class="space-y-3 en-text"></div>
+            </div>
+
+            <!-- Navigation Bar -->
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-start">
+                    <button id="prevBtn" onclick="prevQuestion()" class="flex-1 sm:flex-initial bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:pointer-events-none text-slate-800 font-bold py-2.5 px-5 rounded-xl transition flex items-center justify-center gap-1.5 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span>السابق</span>
+                    </button>
+
+                    <button id="nextBtn" onclick="nextQuestion()" class="flex-1 sm:flex-initial bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:pointer-events-none text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-1.5 text-sm">
+                        <span>التالي</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <button onclick="openFinishModal()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-6 rounded-xl transition shadow-sm text-sm">
+                    إنهاء الاختبار وعرض النتيجة
+                </button>
+            </div>
+
+            <!-- Question Navigator Grid -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h4 class="text-xs sm:text-sm font-bold text-slate-700">خريطة التنقل السريع بين الأسئلة:</h4>
+                    <div class="flex items-center gap-3 text-xs text-slate-600">
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span> تمت الإجابة</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> لم تتم الإجابة</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded ring-2 ring-amber-500 inline-block"></span> السؤال الحالي</span>
+                    </div>
+                </div>
+                <div id="questionGrid" class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-20 gap-1.5 pt-1"></div>
+            </div>
+        </section>
+
+        <!-- 3. Results & Review Screen -->
+        <section id="resultScreen" class="hidden space-y-6">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-6">
+                <div class="space-y-2">
+                    <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
+                        تقرير النتيجة النهائية
+                    </span>
+                    <h2 id="resultLectureTitle" class="en-text text-lg sm:text-xl font-bold text-slate-800 text-center"></h2>
+                </div>
+
+                <!-- Score Circle -->
+                <div class="flex flex-col items-center justify-center">
+                    <div class="w-36 h-36 rounded-full border-8 border-indigo-100 flex flex-col items-center justify-center bg-indigo-50/50 shadow-inner">
+                        <span id="finalPercentage" class="text-3xl font-extrabold text-indigo-700">0%</span>
+                        <span id="finalScoreFraction" class="text-xs font-bold text-slate-600 mt-1">0 / 40</span>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                        <p class="text-xs text-slate-500 font-semibold">إجمالي الأسئلة</p>
+                        <p id="statTotal" class="text-xl font-extrabold text-slate-800 mt-1">0</p>
+                    </div>
+                    <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
+                        <p class="text-xs text-emerald-700 font-semibold">إجابات صحيحة</p>
+                        <p id="statCorrect" class="text-xl font-extrabold text-emerald-700 mt-1">0</p>
+                    </div>
+                    <div class="bg-rose-50 p-3.5 rounded-xl border border-rose-200">
+                        <p class="text-xs text-rose-700 font-semibold">إجابات خاطئة</p>
+                        <p id="statWrong" class="text-xl font-extrabold text-rose-700 mt-1">0</p>
+                    </div>
+                    <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200">
+                        <p class="text-xs text-amber-700 font-semibold">لم تتم الإجابة عنها</p>
+                        <p id="statUnanswered" class="text-xl font-extrabold text-amber-700 mt-1">0</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                    <button onclick="retakeCurrentQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition shadow-sm text-sm">
+                        إعادة نفس الاختبار
+                    </button>
+                    <button onclick="returnHome()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-6 rounded-xl transition text-sm">
+                        اختيار محاضرة أخرى
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review Section -->
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <h3 class="font-extrabold text-base sm:text-lg text-slate-800">مراجعة الأسئلة والإجابات النموذجية</h3>
+                    <div class="flex flex-wrap gap-1.5 text-xs">
+                        <button onclick="filterReview('all')" id="filter-all" class="review-filter-btn bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition">الكل</button>
+                        <button onclick="filterReview('correct')" id="filter-correct" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">الصحيحة</button>
+                        <button onclick="filterReview('wrong')" id="filter-wrong" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">الخاطئة</button>
+                        <button onclick="filterReview('unanswered')" id="filter-unanswered" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">غير المجاب عنها</button>
+                    </div>
+                </div>
+
+                <div id="reviewContainer" class="space-y-4"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Confirmation Modal for Finishing Exam -->
+    <div id="finishModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto font-bold text-xl">
+                !
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-800">هل أنت متأكد من إنهاء الاختبار؟</h3>
+            <p id="finishModalText" class="text-sm text-slate-600 leading-relaxed"></p>
+            <div class="flex items-center justify-center gap-3 pt-2">
+                <button onclick="submitQuiz()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl transition">
+                    نعم، إنهاء وعرض النتيجة
+                </button>
+                <button onclick="closeFinishModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 px-4 rounded-xl transition">
+                    العودة للمراجعة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // قاعدة بيانات الأسئلة المعتمدة (120 سؤالاً)
+        // ==========================================
+        const quizDatabase = {
+            // ----------------------------------------------------
+            // 1. Diagnosis of Pregnancy (20 MCQ + 20 True/False)
+            // ----------------------------------------------------
+            lec1: {
+                title: "1. Diagnosis of Pregnancy",
+                questions: [
+                    // 20 MCQs
+                    {
+                        type: "MCQ",
+                        q: "What is the normal duration of human gestation from fertilization of the ovum until the estimated date of delivery?",
+                        options: ["About 24 weeks", "About 32 weeks", "About 40 weeks", "About 44 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Preterm pregnancy is defined as a pregnancy that ends before how many completed weeks of gestation?",
+                        options: ["35 completed weeks", "37 completed weeks", "40 completed weeks", "42 completed weeks"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Postterm pregnancy is defined as a pregnancy that extends after how many completed weeks of gestation?",
+                        options: ["38 completed weeks", "40 completed weeks", "41 completed weeks", "42 completed weeks"],
+                        answer: 3
+                    },
+                    {
+                        type: "MCQ",
+                        q: "According to Naegele's rule, how is the estimated date of delivery (EDD) calculated from the first day of the last menstrual period (LMP)?",
+                        options: [
+                            "Subtract 3 months and subtract 7 days",
+                            "Subtract 3 months and add 7 days (plus 1 year if appropriate)",
+                            "Add 3 months and add 7 days",
+                            "Subtract 4 months and add 10 days"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the prerequisite for using Naegele's rule accurately to estimate the date of delivery?",
+                        options: [
+                            "A regular 21-day menstrual cycle",
+                            "A regular 28-day menstrual cycle",
+                            "A regular 35-day menstrual cycle",
+                            "Previous twin pregnancy"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which term refers to a woman who has never been pregnant?",
+                        options: ["Nullipara", "Primigravida", "Nulligravida", "Multipara"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In the obstetric history, 'Parity' refers to the number of births carried past how many weeks of gestation, whether or not the fetus was born alive?",
+                        options: ["12 weeks of gestation", "16 weeks of gestation", "20 weeks of gestation", "28 weeks of gestation"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In the GTPAL system, a pregnancy termination or miscarriage is included in 'Gravida' only (and not Parity) if it occurs before:",
+                        options: ["20 weeks of gestation", "24 weeks of gestation", "28 weeks of gestation", "37 weeks of gestation"],
+                        answer: 0
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which category of pregnancy signs can determine a pregnancy with 100% accuracy?",
+                        options: ["Presumptive (subjective) signs", "Probable (objective) signs", "Positive (diagnostic) signs", "Hormonal symptoms"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the earliest subjective (presumptive) symptom of pregnancy in a healthy woman with regular menstrual cycles?",
+                        options: ["Quickening", "Amenorrhea", "Morning sickness", "Frequency of micturition"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Morning sickness usually appears at about 6 weeks after the onset of the last menstrual period and disappears:",
+                        options: ["2 to 4 weeks later", "6 to 12 weeks later", "At 28 weeks of gestation", "At 40 weeks of gestation"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "When does the secondary areola appear on the breast during pregnancy?",
+                        options: ["From 6 weeks", "From 12 weeks", "From 16 weeks", "From 28 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Quickening (a woman's first awareness of fetal movement) occurs in a primigravida at about:",
+                        options: ["10 to 12 weeks", "14 to 15 weeks", "18 to 20 weeks", "24 to 28 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Regular and rhythmic uterine contractions felt during bimanual examination as early as 4–8 weeks are known as:",
+                        options: ["Hegar's sign", "Palmer's sign", "Goodell's sign", "Osiander's sign"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Softening of the lower uterine segment allowing approximation of fingers during bimanual examination is called:",
+                        options: ["Chadwick's sign", "Hegar's sign", "Goodell's sign", "Palmer's sign"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Deep red to purple or bluish coloration of the mucous membranes of the cervix, vagina, and vulva seen at 6 to 8 weeks is:",
+                        options: ["Goodell's sign", "Chadwick's sign", "Osiander's sign", "Hegar's sign"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Increased pulsation felt in the lateral vaginal fornix due to increased pelvic vascularity is known as:",
+                        options: ["Osiander's sign", "Palmer's sign", "Chadwick's sign", "Braxton Hicks sign"],
+                        answer: 0
+                    },
+                    {
+                        type: "MCQ",
+                        q: "By ultrasonography, a gestational sac can be detected after how many weeks of amenorrhea?",
+                        options: ["1 to 2 weeks", "4 to 5 weeks", "12 to 14 weeks", "17 to 20 weeks"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "The fetal heart rate (120–160 beats/min) can be detected with a fetoscope by approximately:",
+                        options: ["6 to 8 weeks of pregnancy", "10 to 12 weeks of pregnancy", "17 to 20 weeks of pregnancy", "28 to 32 weeks of pregnancy"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "All of the following are causes of an oversized uterus (larger than expected gestational weeks) EXCEPT:",
+                        options: ["Vesicular mole", "Hydramnios", "Oligohydramnios", "Twins"],
+                        answer: 2
+                    },
+
+                    // 20 True/False
+                    {
+                        type: "TF",
+                        q: "A primigravida is a woman who is in at least her second pregnancy.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Twin delivery past 20 weeks of gestation is counted as one parity, because parity refers to the number of births rather than the number of fetuses.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "A termination of pregnancy after 20 weeks of gestation is referred to as a therapeutic termination.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Amenorrhea during pregnancy occurs due to high levels of estrogen and progesterone.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Frequency of micturition occurs in the first trimester, disappears in the second trimester, and reappears near the end of pregnancy when the fetal head descends into the maternal pelvis.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Breast changes are considered diagnostic of pregnancy in a multigravida just as in a primigravida.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Quickening may occur as early as 16 weeks of gestation in a multigravida.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Goodell's sign is the softening of the cervix as early as the 6th week of pregnancy, making the pregnant cervix feel like the lips of the mouth.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Braxton Hicks contractions are felt with abdominal palpation after 28 weeks of gestation.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Melasma (chloasma), also called the mask of pregnancy, appears at 16 weeks of gestation.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Fetal outline may be identified by abdominal palpation in pregnant women after 24 weeks of gestation.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "A urine pregnancy test is best performed using a first morning urine specimen because it has the highest concentration of hCG, and it becomes positive about 4 weeks after conception.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "A maternal blood pregnancy test can detect hCG levels before a missed menstrual period.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Positive pregnancy tests based on hCG are classified as Probable (Objective) signs rather than Positive (Diagnostic) signs because other conditions can elevate hCG.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "By ultrasonography, fetal cardiac movement can be noted at 4 to 8 weeks of pregnancy.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Active fetal movements and fetal parts can be palpated by a trained examiner or obstetrician after about 20 weeks of gestation.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Radiological X-ray shows the fetal skeleton starting from the 8th week of pregnancy.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "X-ray exposure during pregnancy carries teratogenic hazards particularly before 10 weeks of gestation and may lead to subsequent leukemia in childhood.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Macrosomia and hydrocephalus are causes of a smaller-than-expected uterine size.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Anencephaly, oligohydramnios, transverse lie, and missed abortion are causes of a small size of the uterus.",
+                        options: ["True", "False"],
+                        answer: 0
+                    }
+                ]
+            },
+
+            // ----------------------------------------------------
+            // 2. Physiological Changes During Pregnancy (20 MCQ + 20 TF)
+            // ----------------------------------------------------
+            lec2: {
+                title: "2. Physiological Changes During Pregnancy",
+                questions: [
+                    // 20 MCQs
+                    {
+                        type: "MCQ",
+                        q: "During pregnancy, the corpus luteum starts to degenerate after how many weeks when the placenta is formed?",
+                        options: ["6 weeks", "10 weeks", "16 weeks", "20 weeks"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which protein hormone secreted by the corpus luteum relaxes the symphysis pubis and other pelvic joints?",
+                        options: ["Prolactin", "Oxytocin", "Relaxin", "Aldosterone"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "During pregnancy, the weight of the uterus increases from about 50 grams in the non-pregnant state to how many grams at 40 weeks of gestation?",
+                        options: ["250 grams", "500 grams", "1000 grams", "2000 grams"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "How much does the capacity of the uterus increase from the non-pregnant state to full term (40 weeks)?",
+                        options: ["From 4 ml to 400 ml", "From 4 ml to 1000 ml", "From 4 ml to 4000 ml", "From 10 ml to 2000 ml"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the shape of the pregnant uterus by the 14th week and by the 16th week till term?",
+                        options: [
+                            "Pyriform by the 14th week and globular by the 16th week",
+                            "Globular by the 14th week and pyriform by the 16th week till term",
+                            "Triangular throughout pregnancy",
+                            "Cylindrical from the 12th week till term"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "The middle muscular layer of the upper uterine segment forms which type of fibers around blood vessels to control postpartum hemorrhage?",
+                        options: ["Circular rings", "8-shaped (figure-of-eight) fibers", "Longitudinal bands", "Spiral fibers"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "At term (40 weeks), uterine blood flow increases progressively to reach about:",
+                        options: ["100 ml/minute", "250 ml/minute", "500 ml/minute", "1000 ml/minute"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "After 12 weeks of gestation, the uterine isthmus (0.5 cm) expands gradually to form the lower uterine segment, which measures at term:",
+                        options: ["2.5 cm in length", "5 cm in length", "10 cm in length", "20 cm in length"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Hypertrophic sebaceous glands that appear as elevations in the primary areola of the breast during pregnancy are called:",
+                        options: ["Nabothian follicles", "Graafian follicles", "Montgomery's follicles", "Bartholin's glands"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "After delivery, reddish abdominal stretch marks (striae gravidarum) become white in color and are called:",
+                        options: ["Linea nigra", "Chloasma", "Striae albicans", "Palmar erythema"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Total blood volume increases steadily during pregnancy to reach a maximum of 45% above the non-pregnant level at:",
+                        options: ["16 weeks", "20 weeks", "32 weeks", "40 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Why does physiological anemia (hemodilution) occur during pregnancy?",
+                        options: [
+                            "Plasma volume increases by 40% whereas red cell mass increases by 20%",
+                            "Plasma volume decreases by 20% whereas red cell mass increases by 40%",
+                            "Bone marrow stops producing erythrocytes",
+                            "Hemolysis of maternal red blood cells"
+                        ],
+                        answer: 0
+                    },
+                    {
+                        type: "MCQ",
+                        q: "During pregnancy, the normal hemoglobin range is 10–14 g/dL; anemia in pregnancy is considered when hemoglobin falls below:",
+                        options: ["12 g/dL", "11.5 g/dL", "10 g/dL", "8 g/dL"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What causes Supine Hypotensive Syndrome when a woman lies on her back in late pregnancy?",
+                        options: [
+                            "Compression of the abdominal aorta by the fetal head",
+                            "Compression of the inferior vena cava by the heavy pregnant uterus leading to poor venous return",
+                            "Sudden drop in maternal blood glucose",
+                            "Excessive vagal stimulation from the cervix"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Cardiac output increases mainly by increased stroke volume, reaching a maximum of 40% above the non-pregnant level at:",
+                        options: ["8 weeks", "12 weeks", "20 weeks", "36 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "During pregnancy, oxygen consumption increases by 15%–20%, while tidal volume increases by:",
+                        options: ["5%–10%", "10%–15%", "30%–40%", "60%–70%"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Excessive salivation during pregnancy, which is more common in association with oral sepsis, is termed:",
+                        options: ["Gingivitis", "Ptyalism", "Hyperemesis", "Pyrosis"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "During pregnancy, thyroid gland activity increases as evidenced by an increase in Basal Metabolic Rate (BMR) by about:",
+                        options: ["10%", "20%", "30%", "50%"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the average total weight gain during pregnancy, and its weekly rate in the 2nd and 3rd trimesters?",
+                        options: [
+                            "5–7 kg (100–200 gm/week)",
+                            "10–12 kg (350–400 gm/week)",
+                            "15–18 kg (600–700 gm/week)",
+                            "20–22 kg (800–900 gm/week)"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Psychological changes in the first trimester typically include anxiety about losing the baby, whereas in the third trimester anxiety shifts to:",
+                        options: [
+                            "Fear of the baby's arrival, labor, and birth",
+                            "Denial of pregnancy",
+                            "Loss of appetite",
+                            "Complete absence of any worries"
+                        ],
+                        answer: 0
+                    },
+
+                    // 20 True/False
+                    {
+                        type: "TF",
+                        q: "Ovulation ceases during pregnancy due to pituitary inhibition caused by high levels of estrogen and progesterone.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "The tissues of the uterus continue to grow in weight for the first 20 weeks, and after this time it stretches to accommodate the growing baby, placenta, and amniotic fluid.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Braxton Hicks contractions cause progressive cervical dilatation during the first and second trimesters.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Endocervical glands secrete thick mucus that forms a cervical plug to prevent ascending bacterial infection into the uterus.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Colostrum, a thick yellowish fluid, can be expressed from the nipples nearly after the second trimester.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Palmar erythema is a pinkish-red mottling over the palms of the hands during pregnancy.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Leucocytes increase from 7,000/mm3 to 10,500/mm3 during pregnancy and up to 16,000/mm3 during labor.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Plasma fibrinogen decreases significantly during pregnancy.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Serum creatinine, blood urea nitrogen (BUN), and uric acid decrease during pregnancy due to plasma expansion and increased glomerular filtration rate (GFR).",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "As the diaphragm is elevated during pregnancy, the apex of the heart is displaced upwards and to the left to lie in the 4th intercostal space outside the mid-clavicular line.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "The resting pulse rate decreases by 10–15 beats/min during pregnancy.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Arterial blood pressure declines during the second trimester due to peripheral vasodilatation caused by estrogens and prostaglandins, then returns to pre-pregnancy levels in the third trimester.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "hCG and prolactin suppress the maternal immune response, and lymphocyte function is depressed during pregnancy.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Hyperventilation of pregnancy causes a 15–20% decrease in maternal arterial CO2, which facilitates the transfer of CO2 from the fetus to the mother.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Gastrointestinal motility and lower esophageal pressure are increased during pregnancy due to high plasma progesterone.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Pregnant women have a higher tendency for gallstone formation due to atony and delayed emptying of the gallbladder.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "The appendix is displaced downwards into the pelvic cavity as the pregnant uterus enlarges.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Dilation of the renal pelvis and ureters during pregnancy leads to urinary stasis and increases the chance of urinary tract infection.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Prolactin levels from the anterior pituitary increase up to 150 mg/ml at term to ensure lactation.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Late in pregnancy, aching, numbness, and weakness in the upper extremities may occur because of lordosis and pressure on the ulnar nerve.",
+                        options: ["True", "False"],
+                        answer: 0
+                    }
+                ]
+            },
+
+            // ----------------------------------------------------
+            // 3. Bleeding in Early Pregnancy (20 MCQ + 20 TF)
+            // ----------------------------------------------------
+            lec3: {
+                title: "3. Bleeding in Early Pregnancy",
+                questions: [
+                    // 20 MCQs
+                    {
+                        type: "MCQ",
+                        q: "Vaginal bleeding occurs in 20% to 30% of confirmed pregnancies during the first:",
+                        options: ["8 weeks of gestation", "12 weeks of gestation", "20 weeks of gestation", "36 weeks of gestation"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the first leading cause of maternal mortality in Egypt according to the course lecture?",
+                        options: ["Cardiac disease", "Hemorrhage", "Gestational diabetes", "Urinary tract infection"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Abortion is defined medically as the loss of pregnancy before the fetus is viable, meaning a fetus of less than how many weeks or weighing less than 500 g?",
+                        options: ["Less than 12 weeks", "Less than 16 weeks", "Less than 20 weeks", "Less than 28 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "About 80% of all recognized spontaneous abortions occur during which period of pregnancy?",
+                        options: [
+                            "The first 2 weeks of pregnancy",
+                            "The 2nd or 3rd months (about 8 to 12 weeks) of pregnancy",
+                            "Between 20 and 24 weeks of pregnancy",
+                            "After 28 weeks of pregnancy"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Pregnant women who develop a fever of at least what temperature appear to have an increased risk of miscarriage?",
+                        options: ["36.8°C", "37.0°C", "37.5°C or more", "40.0°C only"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which type of spontaneous abortion is characterized by spotting vaginal bleeding, a closed cervical os, and intact membranes?",
+                        options: ["Inevitable abortion", "Incomplete abortion", "Threatened abortion", "Complete abortion"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which of the following is the primary aim of treatment in a threatened abortion?",
+                        options: [
+                            "Immediate surgical evacuation of the uterus",
+                            "Conserve the pregnancy by complete bed rest and decreasing uterine contractions",
+                            "Administer high-dose oxytocin infusion",
+                            "Perform immediate cervical dilatation"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In which type of abortion is bleeding excessive with clots, severe colicky lower abdominal pain, a dilated cervical os, and ruptured membranes?",
+                        options: ["Threatened abortion", "Missed abortion", "Inevitable abortion", "Habitual abortion"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In incomplete abortion, D&C may NOT be performed if pregnancy has advanced beyond how many weeks because of the danger of excessive bleeding?",
+                        options: ["8 weeks", "10 weeks", "14 weeks", "20 weeks"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "After a complete abortion, how long is it recommended that a couple wait before trying to conceive again?",
+                        options: [
+                            "At least one regular menstrual cycle",
+                            "At least 2 years",
+                            "At least 5 years",
+                            "Immediate conception within 1 week"
+                        ],
+                        answer: 0
+                    },
+                    {
+                        type: "MCQ",
+                        q: "When a fetus dies during the first half of pregnancy (before 20 weeks) but is retained in the uterus for two months (8 weeks) or longer, it is called:",
+                        options: ["Threatened abortion", "Incomplete abortion", "Missed abortion", "Septic abortion"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the most important cause of habitual (recurrent) abortion (three or more consecutive spontaneous abortions)?",
+                        options: ["Cervical incompetence", "Hyperemesis gravidarum", "Multiparity", "Fetal macrosomia"],
+                        answer: 0
+                    },
+                    {
+                        type: "MCQ",
+                        q: "If cervical incompetence is the cause of habitual abortion, the cervical opening is sutured (cerclage) until which week of gestation?",
+                        options: ["20th week of gestation", "28th week of gestation", "32nd week of gestation", "37th week of gestation"],
+                        answer: 3
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Where do 75% to 80% of tubal ectopic pregnancies occur within the fallopian tube?",
+                        options: ["Interstitial portion", "Isthmus", "Ampulla", "Fimbriae"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the most feared complication of an ectopic pregnancy?",
+                        options: [
+                            "Gestational diabetes",
+                            "Rupture of the fallopian tube leading to severe internal bleeding, shock, and death",
+                            "Pre-eclampsia",
+                            "Choriocarcinoma"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "Which condition is a gestational trophoblastic disease characterized by proliferation and edema of chorionic villi forming grapelike clusters of vesicles?",
+                        options: ["Ectopic pregnancy", "Placenta previa", "Hydatidiform mole (Vesicular mole)", "Missed abortion"],
+                        answer: 2
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In a complete molar pregnancy, what is found inside the uterus?",
+                        options: [
+                            "A normal fetus and normal placenta",
+                            "Only placental parts (vesicles) with no baby/fetus, formed when sperm fertilizes an empty egg",
+                            "Twins with excessive amniotic fluid",
+                            "A viable fetus with a short umbilical cord"
+                        ],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "In hydatidiform mole, vaginal bleeding typically begins at about which week of pregnancy, accompanied by a doughy oversized uterus and ~30% incidence of pre-eclampsia?",
+                        options: ["4th week", "12th week", "28th week", "36th week"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "What is the standard surgical method used to evacuate a hydatidiform mole?",
+                        options: ["Hysterectomy in all patients", "Suction curettage (with IV oxytocin)", "Laparotomy", "Cervical cerclage"],
+                        answer: 1
+                    },
+                    {
+                        type: "MCQ",
+                        q: "After evacuation of a vesicular mole, prophylactic chemotherapy is indicated if the hCG level remains more than 5 IU/L at:",
+                        options: ["1 week postpartum", "4 weeks postpartum", "8 weeks postpartum", "52 weeks postpartum"],
+                        answer: 2
+                    },
+
+                    // 20 True/False
+                    {
+                        type: "TF",
+                        q: "Vaginal bleeding in pregnancy is never normal and should always be investigated.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Smoking more than 10 cigarettes a day increases the risk of miscarriage.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "In threatened abortion, enemas, purgatives, and sexual intercourse should be avoided.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "In inevitable abortion, the process of expulsion of products of conception is reversible and the pregnancy can be saved.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "In incomplete abortion, some parts of the products of conception are expelled while others (placenta and membranes) remain within the uterus.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "In complete abortion, after passage of all products of conception, uterine contractions and bleeding subside and the cervix closes.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "In missed abortion, fundal height continues to increase rapidly and fetal heart sounds remain audible.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Complications of missed abortion include infection and Disseminated Intravascular Coagulation (DIC).",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "If signs of uterine infection exist in missed abortion, uterine evacuation is delayed until cultures are obtained and antimicrobial therapy is initiated.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Septic abortion is an incomplete abortion complicated by infection of the uterine cavity, presenting with offensive vaginal bleeding, tender uterus, and high fever.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Therapeutic abortion is the illegal termination of pregnancy without medical or obstetrical indications.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "More than 95%–98% of ectopic pregnancies occur in the fallopian tube, and ectopic pregnancy occurs in about 1 in 60 pregnancies.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Causes of tubal pregnancy include occlusion of the fallopian tube, impaired tubal ciliary action, and impaired tubal contractility.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Classic signs of ectopic pregnancy include sudden recurrent severe colicky pain in one iliac fossa, amenorrhea, vaginal spotting, and signs of shock.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Once a diagnosis of ectopic pregnancy is made, expectant conservative management until 40 weeks is recommended.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "A partial molar pregnancy contains both abnormal trophoblastic cells and an embryo with severe defects.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Risk factors for vesicular mole include maternal age above 40 (or 45) years or below 19 years, protein malnutrition, and previous history of vesicular mole.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "In hydatidiform mole, fetal movements are strongly felt by the mother and fetal heartbeats are easily detected.",
+                        options: ["True", "False"],
+                        answer: 1
+                    },
+                    {
+                        type: "TF",
+                        q: "Complications of vesicular mole include hemorrhage, choriocarcinoma, uterine perforation, and pregnancy-induced hypertension.",
+                        options: ["True", "False"],
+                        answer: 0
+                    },
+                    {
+                        type: "TF",
+                        q: "Health education after a vesicular mole includes monitoring hCG levels and using birth spacing methods to prevent pregnancy for up to two years.",
+                        options: ["True", "False"],
+                        answer: 0
+                    }
+                ]
+            }
+        };
+
+        // ==========================================
+        // حالة التطبيق والمتغيرات العامة
+        // ==========================================
+        let activeQuestions = [];
+        let userAnswers = [];
+        let currentIndex = 0;
+        let currentLectureKey = "";
+        let currentTitle = "";
+
+        // بدء الاختبار
+        function startQuiz(lectureKey) {
+            currentLectureKey = lectureKey;
+            if (lectureKey === 'all') {
+                currentTitle = "Comprehensive Exam (All 3 Lectures)";
+                activeQuestions = [
+                    ...quizDatabase.lec1.questions.map(q => ({ ...q, lecture: quizDatabase.lec1.title })),
+                    ...quizDatabase.lec2.questions.map(q => ({ ...q, lecture: quizDatabase.lec2.title })),
+                    ...quizDatabase.lec3.questions.map(q => ({ ...q, lecture: quizDatabase.lec3.title }))
+                ];
+            } else {
+                currentTitle = quizDatabase[lectureKey].title;
+                activeQuestions = quizDatabase[lectureKey].questions.map(q => ({
+                    ...q,
+                    lecture: quizDatabase[lectureKey].title
+                }));
+            }
+
+            userAnswers = new Array(activeQuestions.length).fill(null);
+            currentIndex = 0;
+
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            document.getElementById('homeBtn').classList.remove('hidden');
+
+            renderQuestion();
+            renderGrid();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // عرض السؤال الحالي
+        function renderQuestion() {
+            const qObj = activeQuestions[currentIndex];
+            const total = activeQuestions.length;
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+
+            document.getElementById('lectureBadge').textContent = qObj.lecture;
+            document.getElementById('questionCounter').textContent = `السؤال ${currentIndex + 1} من ${total}`;
+            document.getElementById('answeredCounter').textContent = `تمت الإجابة: ${answeredCount} / ${total}`;
+
+            // شريط التقدم يعرض موقع السؤال الحالي دون كشف النتيجة
+            const progressPercent = ((currentIndex + 1) / total) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            // نوع السؤال
+            const typeBadge = document.getElementById('questionTypeBadge');
+            if (qObj.type === 'MCQ') {
+                typeBadge.textContent = `Question ${currentIndex + 1} • Multiple Choice (MCQ)`;
+                typeBadge.className = "en-text text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200";
+            } else {
+                typeBadge.textContent = `Question ${currentIndex + 1} • True / False`;
+                typeBadge.className = "en-text text-xs font-bold px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200";
+            }
+
+            // زر مسح الإجابة
+            const clearBtn = document.getElementById('clearSelectionBtn');
+            if (userAnswers[currentIndex] !== null) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            // نص السؤال
+            document.getElementById('questionText').textContent = `${currentIndex + 1}. ${qObj.q}`;
+
+            // الخيارات
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            qObj.options.forEach((optText, idx) => {
+                const isSelected = userAnswers[currentIndex] === idx;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => selectOption(idx);
+                btn.className = `option-card w-full text-left p-4 rounded-xl border-2 flex items-center gap-3.5 ${
+                    isSelected ? 'option-selected' : 'border-slate-200 bg-white'
+                }`;
+
+                btn.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${
+                        isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700'
+                    }">
+                        ${qObj.type === 'MCQ' ? letters[idx] : (idx === 0 ? 'T' : 'F')}
+                    </span>
+                    <span class="text-sm sm:text-base font-medium text-slate-800">${optText}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // تحديث أزرار السابق والتالي
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === total - 1;
+
+            updateGridHighlight();
+        }
+
+        // اختيار إجابة (دون إظهار صح أو خطأ)
+        function selectOption(optionIdx) {
+            userAnswers[currentIndex] = optionIdx;
+            renderQuestion();
+        }
+
+        // إلغاء اختيار الإجابة للسؤال الحالي
+        function clearCurrentSelection() {
+            userAnswers[currentIndex] = null;
+            renderQuestion();
+        }
+
+        // التنقل للسؤال التالي
+        function nextQuestion() {
+            if (currentIndex < activeQuestions.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            }
+        }
+
+        // التنقل للسؤال السابق
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        // الانتقال المباشر لسؤال معين
+        function jumpToQuestion(index) {
+            currentIndex = index;
+            renderQuestion();
+        }
+
+        // بناء شبكة أرقام الأسئلة
+        function renderGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = '';
+            activeQuestions.forEach((_, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.id = `grid-btn-${idx}`;
+                btn.onclick = () => jumpToQuestion(idx);
+                btn.textContent = idx + 1;
+                grid.appendChild(btn);
+            });
+            updateGridHighlight();
+        }
+
+        // تحديث ألوان شبكة الأسئلة
+        function updateGridHighlight() {
+            activeQuestions.forEach((_, idx) => {
+                const btn = document.getElementById(`grid-btn-${idx}`);
+                if (!btn) return;
+                const isAnswered = userAnswers[idx] !== null;
+                const isCurrent = idx === currentIndex;
+
+                let baseClasses = "grid-btn h-9 rounded-lg text-xs font-bold flex items-center justify-center ";
+                if (isAnswered) {
+                    baseClasses += "bg-indigo-600 text-white ";
+                } else {
+                    baseClasses += "bg-slate-100 text-slate-700 border border-slate-300 hover:bg-slate-200 ";
+                }
+
+                if (isCurrent) {
+                    baseClasses += "ring-2 ring-amber-500 ring-offset-1";
+                }
+
+                btn.className = baseClasses;
+            });
+        }
+
+        // نافذة تأكيد إنهاء الاختبار
+        function openFinishModal() {
+            const total = activeQuestions.length;
+            const answered = userAnswers.filter(a => a !== null).length;
+            const unanswered = total - answered;
+
+            const modalText = document.getElementById('finishModalText');
+            if (unanswered > 0) {
+                modalText.innerHTML = `لقد أجبت عن <strong>${answered}</strong> سؤالاً، ويتبقى لديك <strong class="text-rose-600">${unanswered}</strong> سؤال بدون إجابة.<br>هل ترغب في تسليم الامتحان الآن وعرض النتيجة النهائية؟`;
+            } else {
+                modalText.innerHTML = `لقد أجبت عن جميع الأسئلة (<strong>${total}</strong> من <strong>${total}</strong>).<br>هل أنت مستعد لإنهاء الاختبار وعرض النتيجة النهائية؟`;
+            }
+
+            const modal = document.getElementById('finishModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeFinishModal() {
+            const modal = document.getElementById('finishModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // حساب النتيجة وعرض المراجعة الكاملة
+        function submitQuiz() {
+            closeFinishModal();
+
+            let correct = 0;
+            let wrong = 0;
+            let unanswered = 0;
+
+            activeQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                if (userAns === null) {
+                    unanswered++;
+                } else if (userAns === q.answer) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            const total = activeQuestions.length;
+            const percentage = Math.round((correct / total) * 100);
+
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+
+            document.getElementById('resultLectureTitle').textContent = currentTitle;
+            document.getElementById('finalPercentage').textContent = `${percentage}%`;
+            document.getElementById('finalScoreFraction').textContent = `الدرجة: ${correct} من ${total}`;
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statCorrect').textContent = correct;
+            document.getElementById('statWrong').textContent = wrong;
+            document.getElementById('statUnanswered').textContent = unanswered;
+
+            filterReview('all');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // عرض ومراجعة الأسئلة مع الفلترة
+        function filterReview(filterType) {
+            document.querySelectorAll('.review-filter-btn').forEach(btn => {
+                btn.className = "review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition";
+            });
+            document.getElementById(`filter-${filterType}`).className = "review-filter-btn bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition";
+
+            const container = document.getElementById('reviewContainer');
+            container.innerHTML = '';
+
+            activeQuestions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isUnanswered = userAns === null;
+                const isCorrect = userAns === q.answer;
+
+                if (filterType === 'correct' && !isCorrect) return;
+                if (filterType === 'wrong' && (isCorrect || isUnanswered)) return;
+                if (filterType === 'unanswered' && !isUnanswered) return;
+
+                let statusBadge = '';
+                let borderClass = '';
+
+                if (isUnanswered) {
+                    statusBadge = `<span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">لم تتم الإجابة</span>`;
+                    borderClass = 'border-amber-300 bg-amber-50/20';
+                } else if (isCorrect) {
+                    statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">إجابة صحيحة ✓</span>`;
+                    borderClass = 'border-emerald-300 bg-emerald-50/20';
+                } else {
+                    statusBadge = `<span class="bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-full">إجابة خاطئة ✗</span>`;
+                    borderClass = 'border-rose-300 bg-rose-50/20';
+                }
+
+                const card = document.createElement('div');
+                card.className = `rounded-2xl p-5 border-2 ${borderClass} space-y-3`;
+
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    const isCorrectOpt = optIdx === q.answer;
+                    const isUserOpt = optIdx === userAns;
+
+                    let optStyle = "border-slate-200 bg-white text-slate-700";
+                    let labelNote = "";
+
+                    if (isCorrectOpt && isUserOpt) {
+                        optStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+                        labelNote = `<span class="text-xs font-bold text-emerald-700 shrink-0">(إجابتك الصحيحة ✓)</span>`;
+                    } else if (isCorrectOpt) {
+                        optStyle = "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+                        labelNote = `<span class="text-xs font-bold text-emerald-700 shrink-0">(الإجابة الصحيحة ✓)</span>`;
+                    } else if (isUserOpt && !isCorrectOpt) {
+                        optStyle = "border-rose-500 bg-rose-50 text-rose-900 font-bold";
+                        labelNote = `<span class="text-xs font-bold text-rose-700 shrink-0">(إجابتك الخاطئة ✗)</span>`;
+                    }
+
+                    optionsHtml += `
+                        <div class="p-3 rounded-xl border ${optStyle} flex items-center justify-between gap-2 text-sm">
+                            <span class="en-text">${opt}</span>
+                            ${labelNote}
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-slate-500">السؤال ${idx + 1} (${q.type}) - <span class="en-text">${q.lecture}</span></span>
+                        ${statusBadge}
+                    </div>
+                    <p class="en-text font-bold text-slate-800 text-sm sm:text-base">${idx + 1}. ${q.q}</p>
+                    <div class="space-y-2 pt-1">
+                        ${optionsHtml}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            if (container.innerHTML === '') {
+                container.innerHTML = `<p class="text-center text-slate-500 py-6 text-sm font-semibold">لا توجد أسئلة مطابقة لهذا التصنيف.</p>`;
+            }
+        }
+
+        // إعادة نفس الاختبار
+        function retakeCurrentQuiz() {
+            startQuiz(currentLectureKey);
+        }
+
+        // العودة للرئيسية
+        function confirmReturnHome() {
+            if (!document.getElementById('quizScreen').classList.contains('hidden')) {
+                if (confirm('هل تريد الخروج من الاختبار الحالي والعودة للصفحة الرئيسية؟ سيتم فقدان إجاباتك الحالية.')) {
+                    returnHome();
+                }
+            } else {
+                returnHome();
+            }
+        }
+
+        function returnHome() {
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('homeBtn').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
