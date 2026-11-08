@@ -3,375 +3,965 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبار تمريض النساء والتوليد التفاعلي (MCQ) | جامعة اللوتس</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>اختبار تمريض النساء والتوليد التفاعلي | جامعة اللوتس</title>
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            user-select: none;
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --primary-light: #eef2ff;
+            --success: #059669;
+            --success-light: #ecfdf5;
+            --danger: #e11d48;
+            --danger-light: #fff1f2;
+            --warning: #d97706;
+            --warning-light: #fffbeb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         .en-text {
-            font-family: 'Inter', sans-serif;
             direction: ltr;
             text-align: left;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
         }
-        .option-card {
-            transition: all 0.2s ease-in-out;
+
+        .hidden {
+            display: none !important;
         }
-        .option-card:hover {
-            border-color: #6366f1;
-            background-color: #f5f3ff;
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, #1e1b4b, #312e81, #1e3a8a);
+            color: #fff;
+            padding: 14px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
-        .option-selected {
-            border-color: #4f46e5 !important;
-            background-color: #eef2ff !important;
-            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
         }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .brand-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand-sub {
+            font-size: 12px;
+            color: #c7d2fe;
+        }
+
+        .btn-home {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 14px 40px;
+            flex: 1;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+        }
+
+        .hero-card {
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-indigo {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid #c7d2fe;
+        }
+
+        .badge-easy {
+            background: var(--success-light);
+            color: var(--success);
+            border: 1px solid #a7f3d0;
+        }
+
+        .badge-medium {
+            background: var(--warning-light);
+            color: var(--warning);
+            border: 1px solid #fde68a;
+        }
+
+        .badge-hard {
+            background: var(--danger-light);
+            color: var(--danger);
+            border: 1px solid #fecdd3;
+        }
+
+        .hero-title {
+            font-size: 21px;
+            font-weight: 800;
+            margin: 10px 0 8px;
+            color: #0f172a;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 680px;
+            margin: 0 auto 18px;
+        }
+
+        /* Difficulty Selector */
+        .level-selector-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 640px) {
+            .level-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
         .level-btn {
-            transition: all 0.2s ease;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            background: #f8fafc;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--text);
         }
-        .level-btn-active {
-            background-color: #4f46e5 !important;
-            color: #ffffff !important;
-            border-color: #4f46e5 !important;
+
+        .level-btn:hover {
+            border-color: #94a3b8;
+        }
+
+        .level-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
             box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
-        .grid-btn {
-            transition: all 0.15s ease;
+
+        /* Lecture Cards Grid */
+        .lectures-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
         }
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+
+        @media (min-width: 768px) {
+            .lectures-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
-        ::-webkit-scrollbar-track {
+
+        .lecture-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.2s;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+        }
+
+        .lecture-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.08);
+        }
+
+        .lec-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .lec-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .lec-desc {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .lec-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Comprehensive Banner */
+        .all-exam-banner {
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            color: #fff;
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (min-width: 640px) {
+            .all-exam-banner {
+                flex-direction: row;
+                text-align: right;
+            }
+        }
+
+        .btn-amber {
+            background: #f59e0b;
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .btn-amber {
+                width: auto;
+            }
+        }
+
+        .btn-amber:hover {
+            background: #fbbf24;
+        }
+
+        /* Quiz Active Screen */
+        .quiz-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.25s ease;
+        }
+
+        .q-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .btn-clear {
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .question-text {
+            font-size: 17px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            width: 100%;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.15s;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .option-btn:hover {
+            border-color: #818cf8;
+            background: #f5f3ff;
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+        }
+
+        .opt-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             background: #f1f5f9;
+            color: #334155;
+            font-weight: 800;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
+
+        .option-btn.selected .opt-letter {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .opt-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Navigation Buttons */
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .nav-group {
+                width: auto;
+            }
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .btn-prev {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .btn-prev:hover:not(:disabled) {
+            background: #e2e8f0;
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: var(--primary-dark);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-finish {
+            width: 100%;
+            background: var(--success);
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        @media (min-width: 640px) {
+            .btn-finish {
+                width: auto;
+            }
+        }
+
+        .btn-finish:hover {
+            background: #047857;
+        }
+
+        /* Question Grid */
+        .q-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .q-grid-btn {
+            height: 36px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #334155;
+            cursor: pointer;
+        }
+
+        .q-grid-btn.answered {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .q-grid-btn.current {
+            outline: 2px solid #f59e0b;
+            outline-offset: 1px;
+        }
+
+        /* Results Screen */
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 8px solid #e0e7ff;
+            background: #eef2ff;
+            margin: 16px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-pct {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .score-frac {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 640px;
+            margin: 18px auto;
+        }
+
+        @media (min-width: 640px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-box {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+
+        /* Review Cards */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .review-item {
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .review-item.correct {
+            border-color: #6ee7b7;
+            background: rgba(236, 253, 245, 0.4);
+        }
+
+        .review-item.wrong {
+            border-color: #fda4af;
+            background: rgba(255, 241, 242, 0.4);
+        }
+
+        .review-item.unanswered {
+            border-color: #fcd34d;
+            background: rgba(255, 251, 235, 0.4);
+        }
+
+        .review-opt {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #fff;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .review-opt.opt-correct {
+            border-color: var(--success);
+            background: var(--success-light);
+            color: #065f46;
+            font-weight: 700;
+        }
+
+        .review-opt.opt-wrong {
+            border-color: var(--danger);
+            background: var(--danger-light);
+            color: #9f1239;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 420px;
+            width: 100%;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
 
     <!-- Header -->
-    <header class="bg-gradient-to-l from-indigo-900 via-indigo-800 to-blue-900 text-white shadow-lg sticky top-0 z-30">
-        <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center font-extrabold text-lg border border-white/20 shadow-inner">
-                    LU
-                </div>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand-box">
+                <div class="brand-logo">LU</div>
                 <div>
-                    <h1 class="font-bold text-base sm:text-lg leading-tight">اختبار تمريض النساء والتوليد (OGN3513)</h1>
-                    <p class="text-xs text-indigo-200">كلية التمريض - جامعة اللوتس بالمنيا | د. أمل أحمد عبد الحافظ</p>
+                    <div class="brand-title">اختبار تمريض النساء والتوليد (OGN3513)</div>
+                    <div class="brand-sub">كلية التمريض - جامعة اللوتس بالمنيا | د. أمل أحمد عبد الحافظ</div>
                 </div>
             </div>
-            <button id="homeBtn" onclick="confirmReturnHome()" class="hidden bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold py-2 px-3.5 rounded-xl border border-white/20 transition flex items-center gap-1.5">
-                <span>الرئيسية</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
+            <button id="homeBtn" type="button" onclick="confirmReturnHome()" class="btn-home hidden">
+                الرئيسية 🏠
             </button>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
+    <!-- Main Content -->
+    <main class="container">
 
-        <!-- 1. Start / Lecture & Difficulty Selection Screen -->
-        <section id="startScreen" class="space-y-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 text-center space-y-4">
-                <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
-                    Obstetrics MCQ Exam System
-                </span>
-                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800">اختر مستوى الصعوبة ثم ابدأ محاضرتك</h2>
-                <p class="text-slate-600 text-sm max-w-2xl mx-auto leading-relaxed">
-                    جميع الأسئلة بنظام <strong>الاختيار من متعدد (MCQ)</strong> ومقسمة إلى 3 مستويات (سهل، متوسط، صعب). يعمل الموقع بنظام الامتحان الحقيقي ولن تظهر النتيجة أو الإجابات الصحيحة إلا بعد الضغط على زر <strong>«إنهاء الاختبار»</strong>.
+        <!-- 1. Start Screen -->
+        <section id="startScreen">
+            <div class="card hero-card">
+                <span class="badge badge-indigo">Obstetrics Interactive MCQ Exam</span>
+                <h2 class="hero-title">اختر مستوى الصعوبة ثم ابدأ المحاضرة</h2>
+                <p class="hero-desc">
+                    جميع الأسئلة بنظام <strong>الاختيار من متعدد (MCQ)</strong> ومقسمة إلى 3 مستويات (سهل، متوسط، صعب). يعمل الاختبار بنظام الامتحان الحقيقي ولن تظهر الدرجة أو الإجابات الصحيحة إلا بعد الضغط على زر <strong>«إنهاء الاختبار»</strong>.
                 </p>
 
-                <!-- Difficulty Selector Bar -->
-                <div class="pt-2 max-w-xl mx-auto">
-                    <p class="text-xs font-bold text-slate-500 mb-2.5">حدد مستوى الأسئلة المطلوب:</p>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                        <button onclick="selectDifficulty('all')" id="lvl-all" class="level-btn level-btn-active py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm">
-                            الكل (شامل المستويات)
-                        </button>
-                        <button onclick="selectDifficulty('easy')" id="lvl-easy" class="level-btn py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-emerald-700 font-bold text-xs sm:text-sm">
-                            🟢 مستوى سهل
-                        </button>
-                        <button onclick="selectDifficulty('medium')" id="lvl-medium" class="level-btn py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-amber-700 font-bold text-xs sm:text-sm">
-                            🟡 مستوى متوسط
-                        </button>
-                        <button onclick="selectDifficulty('hard')" id="lvl-hard" class="level-btn py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-rose-700 font-bold text-xs sm:text-sm">
-                            🔴 مستوى صعب
-                        </button>
+                <div>
+                    <div class="level-selector-title">حدد مستوى صعوبة الأسئلة:</div>
+                    <div class="level-grid">
+                        <button type="button" id="lvl-all" onclick="selectDifficulty('all')" class="level-btn active">الكل (شامل المستويات)</button>
+                        <button type="button" id="lvl-easy" onclick="selectDifficulty('easy')" class="level-btn">🟢 سهل (Easy)</button>
+                        <button type="button" id="lvl-medium" onclick="selectDifficulty('medium')" class="level-btn">🟡 متوسط (Medium)</button>
+                        <button type="button" id="lvl-hard" onclick="selectDifficulty('hard')" class="level-btn">🔴 صعب (Hard)</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Lecture Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- 3 Lectures Grid -->
+            <div class="lectures-grid">
                 <!-- Lecture 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-lg border border-blue-200">المحاضرة الأولى</span>
-                            <span id="lec1CountBadge" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">40 سؤال MCQ</span>
+                <div class="lecture-card">
+                    <div>
+                        <div class="lec-top">
+                            <span class="badge badge-indigo">المحاضرة الأولى</span>
+                            <span id="lec1CountBadge" class="badge badge-easy">40 سؤال MCQ</span>
                         </div>
-                        <h3 class="en-text font-bold text-lg text-slate-800">1. Diagnosis of Pregnancy</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">
+                        <h3 class="lec-title en-text">1. Diagnosis of Pregnancy</h3>
+                        <p class="lec-desc">
                             حسابات العمر الحملي بالأسابيع (Weeks)، قاعدة نيجل، نظام GTPAL، وعلامات الحمل الظنية والمحتملة والمؤكدة.
                         </p>
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-semibold">14 سهل</span>
-                            <span class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200 font-semibold">13 متوسط</span>
-                            <span class="text-[11px] bg-rose-50 text-rose-700 px-2 py-0.5 rounded border border-rose-200 font-semibold">13 صعب</span>
+                        <div class="lec-tags">
+                            <span class="tag-pill badge-easy">14 سهل</span>
+                            <span class="tag-pill badge-medium">13 متوسط</span>
+                            <span class="tag-pill badge-hard">13 صعب</span>
                         </div>
                     </div>
-                    <button onclick="startQuiz('lec1')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm text-sm">
-                        ابدأ اختبار المحاضرة الأولى
-                    </button>
+                    <button type="button" onclick="startQuiz('lec1')" class="btn-primary">ابدأ اختبار المحاضرة الأولى</button>
                 </div>
 
                 <!-- Lecture 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-lg border border-emerald-200">المحاضرة الثانية</span>
-                            <span id="lec2CountBadge" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">40 سؤال MCQ</span>
+                <div class="lecture-card">
+                    <div>
+                        <div class="lec-top">
+                            <span class="badge badge-indigo">المحاضرة الثانية</span>
+                            <span id="lec2CountBadge" class="badge badge-easy">40 سؤال MCQ</span>
                         </div>
-                        <h3 class="en-text font-bold text-lg text-slate-800">2. Physiological Changes During Pregnancy</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">
+                        <h3 class="lec-title en-text">2. Physiological Changes During Pregnancy</h3>
+                        <p class="lec-desc">
                             التغيرات الفسيولوجية في الرحم والمبيض والثدي والجلد والدم والقلب والجهاز التنفسي والهضمي والبولي والغدد الصماء.
                         </p>
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-semibold">14 سهل</span>
-                            <span class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200 font-semibold">13 متوسط</span>
-                            <span class="text-[11px] bg-rose-50 text-rose-700 px-2 py-0.5 rounded border border-rose-200 font-semibold">13 صعب</span>
+                        <div class="lec-tags">
+                            <span class="tag-pill badge-easy">14 سهل</span>
+                            <span class="tag-pill badge-medium">13 متوسط</span>
+                            <span class="tag-pill badge-hard">13 صعب</span>
                         </div>
                     </div>
-                    <button onclick="startQuiz('lec2')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm text-sm">
-                        ابدأ اختبار المحاضرة الثانية
-                    </button>
+                    <button type="button" onclick="startQuiz('lec2')" class="btn-primary">ابدأ اختبار المحاضرة الثانية</button>
                 </div>
 
                 <!-- Lecture 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-indigo-400 hover:shadow-md transition flex flex-col justify-between">
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-lg border border-rose-200">المحاضرة الثالثة</span>
-                            <span id="lec3CountBadge" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md">40 سؤال MCQ</span>
+                <div class="lecture-card">
+                    <div>
+                        <div class="lec-top">
+                            <span class="badge badge-indigo">المحاضرة الثالثة</span>
+                            <span id="lec3CountBadge" class="badge badge-easy">40 سؤال MCQ</span>
                         </div>
-                        <h3 class="en-text font-bold text-lg text-slate-800">3. Bleeding in Early Pregnancy</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">
+                        <h3 class="lec-title en-text">3. Bleeding in Early Pregnancy</h3>
+                        <p class="lec-desc">
                             أنواع الإجهاض السبعة وعلاجها التمريضي والطبي، الحمل خارج الرحم (Ectopic)، والحمل العنقودي (Hydatidiform Mole).
                         </p>
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-semibold">14 سهل</span>
-                            <span class="text-[11px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200 font-semibold">13 متوسط</span>
-                            <span class="text-[11px] bg-rose-50 text-rose-700 px-2 py-0.5 rounded border border-rose-200 font-semibold">13 صعب</span>
+                        <div class="lec-tags">
+                            <span class="tag-pill badge-easy">14 سهل</span>
+                            <span class="tag-pill badge-medium">13 متوسط</span>
+                            <span class="tag-pill badge-hard">13 صعب</span>
                         </div>
                     </div>
-                    <button onclick="startQuiz('lec3')" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl transition shadow-sm text-sm">
-                        ابدأ اختبار المحاضرة الثالثة
-                    </button>
+                    <button type="button" onclick="startQuiz('lec3')" class="btn-primary">ابدأ اختبار المحاضرة الثالثة</button>
                 </div>
             </div>
 
-            <!-- Comprehensive Exam Banner -->
-            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 rounded-2xl p-6 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div class="space-y-1 text-center sm:text-right">
-                    <div class="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">
-                        <span>امتحان مجمع MCQ</span>
-                        <span>•</span>
-                        <span id="allCountBadge">120 سؤالاً</span>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold">الاختبار الشامل للمحاضرات الثلاث معاً</h3>
-                    <p class="text-xs sm:text-sm text-slate-300">يجمع أسئلة المحاضرات الثلاث حسب مستوى الصعوبة الذي اخترته في الأعلى.</p>
+            <!-- All Lectures Banner -->
+            <div class="all-exam-banner">
+                <div>
+                    <span id="allCountBadge" class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fcd34d; margin-bottom: 6px;">امتحان شامل • 120 سؤال MCQ</span>
+                    <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 4px;">الاختبار الشامل للمحاضرات الثلاث معاً</h3>
+                    <p style="font-size: 13px; color: #cbd5e1;">يجمع أسئلة المحاضرات الثلاث حسب مستوى الصعوبة المختار في الأعلى.</p>
                 </div>
-                <button onclick="startQuiz('all')" class="w-full sm:w-auto shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3 px-6 rounded-xl transition shadow text-sm">
-                    ابدأ الامتحان الشامل
-                </button>
+                <button type="button" onclick="startQuiz('all')" class="btn-amber">ابدأ الامتحان الشامل الآن</button>
             </div>
         </section>
 
-        <!-- 2. Active Quiz Screen -->
-        <section id="quizScreen" class="hidden space-y-5">
-            <!-- Top Progress & Info Card -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <div class="flex items-center gap-2">
-                        <span id="lectureBadge" class="en-text text-xs font-bold bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg border border-indigo-200"></span>
-                        <span id="difficultyBadge" class="text-xs font-bold px-2.5 py-1 rounded-lg border"></span>
+        <!-- 2. Quiz Screen -->
+        <section id="quizScreen" class="hidden">
+            <div class="card">
+                <div class="quiz-meta-row">
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span id="lectureBadge" class="badge badge-indigo en-text"></span>
+                        <span id="difficultyBadge" class="badge"></span>
                     </div>
-                    <div class="flex items-center gap-3 text-xs sm:text-sm font-bold text-slate-700">
+                    <div style="font-size: 13px; font-weight: 700;">
                         <span id="questionCounter">السؤال 1 من 40</span>
-                        <span class="text-slate-300">|</span>
-                        <span id="answeredCounter" class="text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">تمت الإجابة: 0</span>
+                        <span style="margin: 0 6px; color: #cbd5e1;">|</span>
+                        <span id="answeredCounter" class="badge badge-easy">تمت الإجابة: 0</span>
                     </div>
                 </div>
-
-                <!-- Progress Bar -->
-                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                    <div id="progressBar" class="bg-indigo-600 h-full transition-all duration-300" style="width: 2.5%"></div>
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-fill"></div>
                 </div>
             </div>
 
-            <!-- Question Card -->
-            <div class="bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-200 space-y-6">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <span id="questionTypeBadge" class="en-text text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700"></span>
-                    <button onclick="clearCurrentSelection()" id="clearSelectionBtn" class="hidden text-xs text-rose-600 hover:text-rose-700 font-semibold">
-                        إلغاء تحديد الإجابة
+            <div class="card">
+                <div class="q-header-row">
+                    <span id="questionTypeBadge" class="badge badge-indigo en-text">Question 1 • Multiple Choice</span>
+                    <button type="button" id="clearSelectionBtn" onclick="clearCurrentSelection()" class="btn-clear hidden">
+                        إلغاء تحديد الإجابة ✕
                     </button>
                 </div>
 
-                <!-- English Question Text -->
-                <div id="questionText" class="en-text text-base sm:text-lg font-semibold text-slate-800 leading-relaxed"></div>
-
-                <!-- Options Container -->
-                <div id="optionsContainer" class="space-y-3 en-text"></div>
+                <div id="questionText" class="question-text en-text"></div>
+                <div id="optionsContainer" class="options-list"></div>
             </div>
 
-            <!-- Navigation Bar -->
-            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
-                <div class="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-start">
-                    <button id="prevBtn" onclick="prevQuestion()" class="flex-1 sm:flex-initial bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:pointer-events-none text-slate-800 font-bold py-2.5 px-5 rounded-xl transition flex items-center justify-center gap-1.5 text-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span>السابق</span>
-                    </button>
-
-                    <button id="nextBtn" onclick="nextQuestion()" class="flex-1 sm:flex-initial bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:pointer-events-none text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-1.5 text-sm">
-                        <span>التالي</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
+            <div class="card nav-bar">
+                <div class="nav-group">
+                    <button type="button" id="prevBtn" onclick="prevQuestion()" class="btn-nav btn-prev">→ السابق</button>
+                    <button type="button" id="nextBtn" onclick="nextQuestion()" class="btn-nav btn-next">التالي ←</button>
                 </div>
-
-                <button onclick="openFinishModal()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-6 rounded-xl transition shadow-sm text-sm">
-                    إنهاء الاختبار وعرض النتيجة
-                </button>
+                <button type="button" onclick="openFinishModal()" class="btn-finish">إنهاء الاختبار وعرض النتيجة ✓</button>
             </div>
 
-            <!-- Question Navigator Grid -->
-            <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <h4 class="text-xs sm:text-sm font-bold text-slate-700">خريطة التنقل السريع بين الأسئلة:</h4>
-                    <div class="flex items-center gap-3 text-xs text-slate-600">
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-indigo-600 inline-block"></span> تمت الإجابة</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> لم تتم الإجابة</span>
-                        <span class="flex items-center gap-1"><span class="w-3 h-3 rounded ring-2 ring-amber-500 inline-block"></span> السؤال الحالي</span>
+            <div class="card">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px;">
+                    <span style="font-size: 13px; font-weight: 700;">خريطة التنقل السريع بين الأسئلة:</span>
+                    <div style="font-size: 12px; color: var(--muted); display: flex; gap: 12px;">
+                        <span>🟦 مجاب عنه</span>
+                        <span>⬜ غير مجاب</span>
+                        <span>🟨 السؤال الحالي</span>
                     </div>
                 </div>
-                <div id="questionGrid" class="grid grid-cols-8 sm:grid-cols-10 md:grid-cols-20 gap-1.5 pt-1"></div>
+                <div id="questionGrid" class="q-grid"></div>
             </div>
         </section>
 
-        <!-- 3. Results & Review Screen -->
-        <section id="resultScreen" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-6">
-                <div class="space-y-2">
-                    <span class="inline-block bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-200">
-                        تقرير النتيجة النهائية
-                    </span>
-                    <h2 id="resultLectureTitle" class="en-text text-lg sm:text-xl font-bold text-slate-800 text-center"></h2>
-                    <p id="resultLevelSubtitle" class="text-xs font-bold text-slate-500"></p>
+        <!-- 3. Result Screen -->
+        <section id="resultScreen" class="hidden">
+            <div class="card hero-card">
+                <span class="badge badge-indigo">تقرير النتيجة النهائية</span>
+                <h2 id="resultLectureTitle" class="hero-title en-text" style="text-align: center; margin-top: 8px;"></h2>
+                <p id="resultLevelSubtitle" style="font-size: 13px; font-weight: 700; color: var(--muted);"></p>
+
+                <div class="score-circle">
+                    <div id="finalPercentage" class="score-pct">0%</div>
+                    <div id="finalScoreFraction" class="score-frac">0 / 40</div>
                 </div>
 
-                <!-- Score Circle -->
-                <div class="flex flex-col items-center justify-center">
-                    <div class="w-36 h-36 rounded-full border-8 border-indigo-100 flex flex-col items-center justify-center bg-indigo-50/50 shadow-inner">
-                        <span id="finalPercentage" class="text-3xl font-extrabold text-indigo-700">0%</span>
-                        <span id="finalScoreFraction" class="text-xs font-bold text-slate-600 mt-1">0 / 40</span>
+                <div class="stats-grid">
+                    <div class="stat-box" style="background: #f8fafc;">
+                        <div style="font-size: 12px; font-weight: 700; color: var(--muted);">إجمالي الأسئلة</div>
+                        <div id="statTotal" class="stat-num">0</div>
                     </div>
-                </div>
-
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                        <p class="text-xs text-slate-500 font-semibold">إجمالي الأسئلة</p>
-                        <p id="statTotal" class="text-xl font-extrabold text-slate-800 mt-1">0</p>
+                    <div class="stat-box" style="background: var(--success-light); border-color: #a7f3d0; color: var(--success);">
+                        <div style="font-size: 12px; font-weight: 700;">إجابات صحيحة</div>
+                        <div id="statCorrect" class="stat-num">0</div>
                     </div>
-                    <div class="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200">
-                        <p class="text-xs text-emerald-700 font-semibold">إجابات صحيحة</p>
-                        <p id="statCorrect" class="text-xl font-extrabold text-emerald-700 mt-1">0</p>
+                    <div class="stat-box" style="background: var(--danger-light); border-color: #fecdd3; color: var(--danger);">
+                        <div style="font-size: 12px; font-weight: 700;">إجابات خاطئة</div>
+                        <div id="statWrong" class="stat-num">0</div>
                     </div>
-                    <div class="bg-rose-50 p-3.5 rounded-xl border border-rose-200">
-                        <p class="text-xs text-rose-700 font-semibold">إجابات خاطئة</p>
-                        <p id="statWrong" class="text-xl font-extrabold text-rose-700 mt-1">0</p>
-                    </div>
-                    <div class="bg-amber-50 p-3.5 rounded-xl border border-amber-200">
-                        <p class="text-xs text-amber-700 font-semibold">لم تتم الإجابة عنها</p>
-                        <p id="statUnanswered" class="text-xl font-extrabold text-amber-700 mt-1">0</p>
+                    <div class="stat-box" style="background: var(--warning-light); border-color: #fde68a; color: var(--warning);">
+                        <div style="font-size: 12px; font-weight: 700;">لم تتم الإجابة</div>
+                        <div id="statUnanswered" class="stat-num">0</div>
                     </div>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-                    <button onclick="retakeCurrentQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition shadow-sm text-sm">
-                        إعادة نفس الاختبار
-                    </button>
-                    <button onclick="returnHome()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-2.5 px-6 rounded-xl transition text-sm">
-                        اختيار محاضرة أو مستوى آخر
-                    </button>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px;">
+                    <button type="button" onclick="retakeCurrentQuiz()" class="btn-primary" style="width: auto; padding: 12px 28px;">إعادة نفس الاختبار ↻</button>
+                    <button type="button" onclick="returnHome()" class="btn-nav btn-prev" style="flex: initial; padding: 12px 28px;">اختيار محاضرة أو مستوى آخر</button>
                 </div>
             </div>
 
-            <!-- Review Section -->
-            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5">
-                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
-                    <h3 class="font-extrabold text-base sm:text-lg text-slate-800">مراجعة الأسئلة والإجابات النموذجية</h3>
-                    <div class="flex flex-wrap gap-1.5 text-xs">
-                        <button onclick="filterReview('all')" id="filter-all" class="review-filter-btn bg-indigo-600 text-white font-bold px-3 py-1.5 rounded-lg transition">الكل</button>
-                        <button onclick="filterReview('correct')" id="filter-correct" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">الصحيحة</button>
-                        <button onclick="filterReview('wrong')" id="filter-wrong" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">الخاطئة</button>
-                        <button onclick="filterReview('unanswered')" id="filter-unanswered" class="review-filter-btn bg-slate-100 text-slate-700 font-bold px-3 py-1.5 rounded-lg transition">غير المجاب عنها</button>
+            <div class="card">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--border);">
+                    <h3 style="font-size: 16px; font-weight: 800;">مراجعة الأسئلة والإجابات النموذجية</h3>
+                    <div class="filter-bar">
+                        <button type="button" id="filter-all" onclick="filterReview('all')" class="filter-btn active">الكل</button>
+                        <button type="button" id="filter-correct" onclick="filterReview('correct')" class="filter-btn">الصحيحة</button>
+                        <button type="button" id="filter-wrong" onclick="filterReview('wrong')" class="filter-btn">الخاطئة</button>
+                        <button type="button" id="filter-unanswered" onclick="filterReview('unanswered')" class="filter-btn">غير المجاب عنها</button>
                     </div>
                 </div>
-
-                <div id="reviewContainer" class="space-y-4"></div>
+                <div id="reviewContainer"></div>
             </div>
         </section>
 
     </main>
 
-    <!-- Confirmation Modal for Finishing Exam -->
-    <div id="finishModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 space-y-4 text-center">
-            <div class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto font-bold text-xl">
-                !
-            </div>
-            <h3 class="text-lg font-extrabold text-slate-800">هل أنت متأكد من إنهاء الاختبار؟</h3>
-            <p id="finishModalText" class="text-sm text-slate-600 leading-relaxed"></p>
-            <div class="flex items-center justify-center gap-3 pt-2">
-                <button onclick="submitQuiz()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-4 rounded-xl transition">
-                    نعم، إنهاء وعرض النتيجة
-                </button>
-                <button onclick="closeFinishModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 px-4 rounded-xl transition">
-                    العودة للمراجعة
-                </button>
+    <!-- Finish Confirmation Modal -->
+    <div id="finishModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--warning-light); color: var(--warning); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; margin: 0 auto 12px;">!</div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">تأكيد إنهاء الاختبار</h3>
+            <p id="finishModalText" style="font-size: 14px; color: var(--muted); margin-bottom: 20px;"></p>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="submitQuiz()" class="btn-finish" style="flex: 1;">نعم، إنهاء وعرض النتيجة</button>
+                <button type="button" onclick="closeFinishModal()" class="btn-nav btn-prev" style="flex: 1;">العودة للمراجعة</button>
             </div>
         </div>
     </div>
 
     <script>
         // =========================================================================
-        // قاعدة بيانات الأسئلة المعتمدة (120 سؤال اختيار من متعدد MCQ فقط)
+        // قاعدة بيانات الأسئلة المعتمدة (120 سؤال اختيار من متعدد MCQ)
         // مقسمة إلى: سهل (easy) - متوسط (medium) - صعب (hard)
         // =========================================================================
         const quizDatabase = {
-            // ----------------------------------------------------
-            // 1. Diagnosis of Pregnancy (40 MCQs: 14 Easy, 13 Medium, 13 Hard)
-            // ----------------------------------------------------
+            // 1. Diagnosis of Pregnancy (40 MCQs)
             lec1: {
                 title: "1. Diagnosis of Pregnancy",
                 questions: [
-                    // --- EASY (14 Questions) ---
+                    // EASY (14)
                     {
                         level: "easy",
                         q: "What is the normal duration of human gestation from fertilization of the ovum until the estimated date of delivery?",
@@ -462,7 +1052,7 @@
                         answer: 2
                     },
 
-                    // --- MEDIUM (13 Questions) ---
+                    // MEDIUM (13)
                     {
                         level: "medium",
                         q: "According to Naegele's rule, how is the estimated date of delivery (EDD) calculated from the first day of the last menstrual period (LMP)?",
@@ -552,7 +1142,7 @@
                         answer: 2
                     },
 
-                    // --- HARD (13 Questions) ---
+                    // HARD (13)
                     {
                         level: "hard",
                         q: "How is a twin delivery carried past 20 weeks of gestation recorded in the mother's Parity count?",
@@ -671,134 +1261,4 @@
                     },
                     {
                         level: "hard",
-                        q: "Which of the following combinations represents causes of a smaller-than-expected uterine size during pregnancy?",
-                        options: [
-                            "Twins, hydramnios, and vesicular mole",
-                            "Anencephaly, oligohydramnios, transverse lie, and missed abortion",
-                            "Macrosomia, hydrocephalus, and multiple gestation",
-                            "Polyhydramnios and fetal hydrocephalus"
-                        ],
-                        answer: 1
-                    },
-                    {
-                        level: "hard",
-                        q: "Which sign is both a cause of an oversized uterus AND a cause of a small-sized uterus when comparing fundal height to amenorrhea?",
-                        options: ["Miscalculation of gestational age", "Anencephaly", "Vesicular mole", "Transverse lie"],
-                        answer: 0
-                    }
-                ]
-            },
-
-            // ----------------------------------------------------
-            // 2. Physiological Changes During Pregnancy (40 MCQs: 14 Easy, 13 Medium, 13 Hard)
-            // ----------------------------------------------------
-            lec2: {
-                title: "2. Physiological Changes During Pregnancy",
-                questions: [
-                    // --- EASY (14 Questions) ---
-                    {
-                        level: "easy",
-                        q: "Why does ovulation cease during pregnancy?",
-                        options: [
-                            "Due to pituitary inhibition caused by high levels of estrogen and progesterone",
-                            "Due to increased secretion of FSH and LH",
-                            "Due to degeneration of the fallopian tubes",
-                            "Due to high levels of maternal oxytocin"
-                        ],
-                        answer: 0
-                    },
-                    {
-                        level: "easy",
-                        q: "Which protein hormone secreted by the corpus luteum relaxes the symphysis pubis and other pelvic joints?",
-                        options: ["Prolactin", "Oxytocin", "Relaxin", "Aldosterone"],
-                        answer: 2
-                    },
-                    {
-                        level: "easy",
-                        q: "What is the function of the thick mucus plug secreted by endocervical glands during pregnancy?",
-                        options: [
-                            "Stimulates uterine contractions",
-                            "Obstructs the cervical canal and prevents bacteria from ascending into the uterus",
-                            "Nourishes the fetus in the third trimester",
-                            "Increases vaginal bleeding"
-                        ],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "What is the thick yellowish fluid that can be expressed from the nipples nearly after the second trimester?",
-                        options: ["Sebum", "Colostrum", "Amniotic fluid", "Serous exudate"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Hypertrophic sebaceous glands that appear as elevations in the primary areola of the breast during pregnancy are called:",
-                        options: ["Nabothian follicles", "Graafian follicles", "Montgomery's follicles", "Bartholin's glands"],
-                        answer: 2
-                    },
-                    {
-                        level: "easy",
-                        q: "What is the butterfly-shaped brownish pigmentation appearing on the cheeks, nose, and forehead during pregnancy called?",
-                        options: ["Striae albicans", "Chloasma (pregnancy mask)", "Linea nigra", "Palmar erythema"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "What is 'Palmar erythema' observed during pregnancy?",
-                        options: [
-                            "Dark line on the abdomen",
-                            "Pinkish-red mottling over the palms of the hands",
-                            "Stretch marks on the thighs",
-                            "Edema of the ankles"
-                        ],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Excessive salivation during pregnancy, which is more common in association with oral sepsis, is termed:",
-                        options: ["Gingivitis", "Ptyalism", "Hyperemesis", "Pyrosis"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Nausea (morning sickness) and vomiting (emesis gravidarum) in the early months of pregnancy occur due to rising levels of:",
-                        options: ["Oxytocin", "hCG hormone", "Relaxin", "Insulin"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "How is the appendix displaced as the uterus enlarges during pregnancy?",
-                        options: [
-                            "Displaced downwards into the pelvis",
-                            "Displaced upwards by the enlarged uterus",
-                            "Displaced to the left iliac fossa",
-                            "Remains in its exact non-pregnant position"
-                        ],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Which posterior pituitary hormone increases near term to stimulate the onset of labor?",
-                        options: ["Prolactin", "Oxytocin", "Thyroxine", "Parathyroid hormone"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Why do the parathyroid glands increase in size and activity during pregnancy?",
-                        options: [
-                            "To regulate the increased calcium metabolism",
-                            "To suppress maternal immunity",
-                            "To stimulate bile secretion",
-                            "To decrease maternal heart rate"
-                        ],
-                        answer: 0
-                    },
-                    {
-                        level: "easy",
-                        q: "What is the average total weight gain during a normal pregnancy?",
-                        options: ["3–5 kg", "10–12 kg", "18–22 kg", "25–30 kg"],
-                        answer: 1
-                    },
-                    {
-                        level: "easy",
-                        q: "Psychological changes in the first trimester typically include anxiety a
+                        q: "Which of the following combinations represents causes of a smaller-t
