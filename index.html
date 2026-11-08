@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obstetrics Exam | Lotus Nursing</title>
+<style>
+:root{--bg:#080d18;--panel:#111c2e;--panel2:#17243a;--text:#eef4ff;--muted:#9aabc3;--blue:#42a5ff;--gold:#ffc857;--green:#31c48d;--red:#ff647c}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#080d18,#101d32);color:var(--text);font-family:Arial,Tahoma,sans-serif;min-height:100vh}
+header{padding:22px 16px;text-align:center;border-bottom:1px solid #253650}
+header h1{margin:0;color:var(--gold);font-size:25px}
+header p{color:var(--muted);margin:9px 0 0}
+.container{max-width:950px;margin:25px auto;padding:0 14px}
+.panel{background:var(--panel);border:1px solid #263a58;border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 12px 35px #0005}
+h2{margin-top:0;color:var(--blue)}
+label{display:block;margin:12px 0 7px;color:var(--muted)}
+select,button{font:inherit}
+select{width:100%;padding:13px;background:var(--panel2);color:white;border:1px solid #38506f;border-radius:10px}
+button{border:0;border-radius:10px;padding:13px 19px;background:var(--blue);color:#061326;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.secondary{background:#263a58;color:white}
+button.gold{background:var(--gold)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.hidden{display:none!important}
+.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);margin-bottom:15px}
+.progress{height:8px;background:#253650;border-radius:20px;overflow:hidden;margin:12px 0 22px}
+.progress div{height:100%;background:var(--blue);width:0;transition:.2s}
+.question{font-size:20px;line-height:1.7;margin:15px 0 22px;direction:ltr;text-align:left}
+.choice{display:flex;gap:12px;align-items:center;background:var(--panel2);border:1px solid #304765;padding:14px;border-radius:12px;margin:10px 0;cursor:pointer;direction:ltr;text-align:left}
+.choice.selected{border-color:var(--blue);background:#16385a}
+.choice input{accent-color:var(--blue);width:18px;height:18px}
+.navgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:20px}
+.navgrid button{padding:9px;background:#263650;color:white}
+.navgrid button.answered{background:#175b4d}
+.navgrid button.current{outline:2px solid var(--gold)}
+.resultbig{font-size:38px;color:var(--gold);font-weight:bold;text-align:center}
+.review{border:1px solid #304765;border-radius:12px;padding:15px;margin:12px 0}
+.correct{color:var(--green)}.wrong{color:var(--red)}
+.small{color:var(--muted);font-size:13px}
+@media(max-width:550px){.panel{padding:16px}.question{font-size:18px}.navgrid{grid-template-columns:repeat(5,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<h1>OBSTETRICS EXAM</h1>
+<p>Lotus University · Faculty of Nursing</p>
+</header>
+<div class="container">
+
+<section id="setup" class="panel">
+<h2>إعداد الاختبار</h2>
+<label>اختار المحاضرة</label>
+<select id="lecture">
+<option value="0">Diagnosis of Pregnancy</option>
+<option value="1">Physiological Changes During Pregnancy</option>
+<option value="2">Bleeding in Early Pregnancy</option>
+<option value="all">All Lectures</option>
+</select>
+<label>مستوى الصعوبة</label>
+<select id="difficulty">
+<option value="all">كل المستويات</option>
+<option value="easy">Easy</option>
+<option value="medium">Medium</option>
+<option value="hard">Hard</option>
+</select>
+<p class="small">تم تصحيح الأسئلة بناءً على المنهج المعتمد لكلية التمريض بجامعة لوتس.</p>
+<button class="gold" onclick="startExam()">ابدأ الامتحان</button>
+</section>
+
+<section id="exam" class="panel hidden">
+<div class="topline">
+<span id="lectureName"></span>
+<span id="counter"></span>
+<span id="type"></span>
+</div>
+<div class="progress"><div id="bar"></div></div>
+<div id="question" class="question"></div>
+<div id="choices"></div>
+<div class="actions">
+<button class="secondary" id="prev" onclick="move(-1)">السابق</button>
+<button id="next" onclick="move(1)">التالي</button>
+<button class="gold" id="finish" onclick="finishExam()">إنهاء الامتحان وعرض النتيجة</button>
+</div>
+<div class="small" style="margin-top:15px">يمكنك تغيير إجابتك في أي وقت قبل إنهاء الامتحان.</div>
+<div id="nav" class="navgrid"></div>
+</section>
+
+<section id="result" class="panel hidden">
+<h2>نتيجة الامتحان</h2>
+<div class="resultbig" id="score"></div>
+<p id="stats" style="text-align:center"></p>
+<div class="actions">
+<button class="gold" onclick="location.reload()">اختبار جديد</button>
+</div>
+<h2 style="margin-top:30px">مراجعة الإجابات</h2>
+<div id="reviews"></div>
+</section>
+</div>
+
+<script>
+const lectures=[
+"Diagnosis of Pregnancy",
+"Physiological Changes During Pregnancy",
+"Bleeding in Early Pregnancy"
+];
+
+/* MCQ: السؤال، الاختيارات، رقم الإجابة الصحيحة، مستوى الصعوبة (مصصح حسب المنهج) */
+const mcq=[
+[
+["A fetal heart rate can be detected by a fetoscope at approximately:",["8-10 weeks","17-20 weeks","24-28 weeks","30-32 weeks"],1,"easy"],
+["The normal fetal heart rate mentioned in the book is:",["80-100 beats/min","100-120 beats/min","120-160 beats/min","160-180 beats/min"],2,"easy"],
+["Ultrasonography can provide a positive diagnosis of pregnancy as early as:",["First week","Second week","Fourth to fifth week","Twelfth week"],2,"easy"],
+["The best urine specimen for a pregnancy test is:",["Evening urine","Random urine","Afternoon urine","First morning urine"],3,"easy"],
+["Fetal movements are actively palpable by a trained examiner after approximately:",["10 weeks","15 weeks","20 weeks","30 weeks"],2,"easy"],
+["Goodell's sign refers to:",["A softening of the cervix","Bluish vagina","Uterine contraction","Breast enlargement"],0,"easy"],
+["Chadwick's sign is:",["Softening of cervix","Purple discoloration of vaginal mucosa","Fetal movement","Uterine enlargement"],1,"easy"],
+["Which of the following is a positive sign of pregnancy?",["Amenorrhea","Morning sickness","Fetal heart rate","Breast enlargement"],2,"easy"],
+["Preterm pregnancy means delivery before:",["20 completed weeks","28 completed weeks","37 completed weeks","42 completed weeks"],2,"easy"],
+["Post-term pregnancy means pregnancy after:",["37 weeks","40 weeks","41 weeks","42 weeks"],3,"easy"],
+["Gravidity refers to:",["Number of births","Number of pregnancies","Number of living children","Number of abortions only"],1,"medium"],
+["Parity refers to the number of births carried beyond:",["12 weeks","16 weeks","20 weeks","28 weeks"],2,"medium"],
+["In GTPAL, the letter L refers to:",["Late pregnancy","Living children","Labor","Losses"],1,"medium"],
+["A nulligravida is a woman who:",["Has never been pregnant","Is pregnant for the first time","Has two pregnancies","Has one birth"],0,"medium"],
+["A primigravida is a woman who:",["Has never been pregnant","Is pregnant for the first time","Has had twins","Has two or more pregnancies"],1,"medium"],
+["Use of Naegele's rule requires that the woman have a regular menstrual cycle of:",["21 days","24 days","28 days","35 days"],2,"medium"],
+["According to Naegele's rule, EDD is calculated by:",["Adding 3 months and subtracting 7 days","Subtracting 3 months and adding 7 days","Adding 6 months","Subtracting 7 months"],1,"medium"],
+["Which of the following is a presumptive sign?",["Fetal heart sounds","Ultrasound visualization","Nausea and vomiting","Fetal parts palpated by examiner"],2,"medium"],
+["Which of the following is a probable sign?",["Amenorrhea","Chadwick's sign","Fetal heart sounds","Fetus seen on ultrasound"],1,"hard"],
+["X-ray can demonstrate the fetal skeleton starting from approximately:",["8 weeks","12 weeks","16 weeks","30 weeks"],2,"hard"]
+],
+[
+["Both ovaries become enlarged during pregnancy mainly due to:",["Decreased blood supply","Increased vascularity and edema","Decreased hormonal activity","Uterine pressure only"],1,"easy"],
+["The corpus luteum starts to degenerate after:",["4 weeks","10 weeks","20 weeks","28 weeks"],1,"easy"],
+["The corpus luteum secretes:",["Insulin, oxytocin, and prolactin","Estrogen, progesterone, and relaxin","FSH, LH, and oxytocin","Thyroxine and insulin"],1,"easy"],
+["Relaxin helps to:",["Contract pelvic joints","Relax the symphysis pubis and other pelvic joints","Stop fetal growth","Increase ovulation"],1,"easy"],
+["Ovulation ceases during pregnancy due to:",["Low estrogen and progesterone","Pituitary inhibition caused by high estrogen and progesterone","Decreased placental activity","Increased FSH secretion"],1,"easy"],
+["During pregnancy, the ovaries stop producing:",["Estrogen","Progesterone","Ovum","Relaxin"],2,"easy"],
+["Pregnancy physiological changes begin:",["After delivery","After conception","At 20 weeks only","During labor"],1,"easy"],
+["Physiological changes during pregnancy affect:",["Only reproductive system","Only cardiovascular system","Every organ system","Only the breasts"],2,"easy"],
+["The placenta takes over the hormonal role as the corpus luteum:",["Degenerates after 10 weeks","Grows after delivery","Stops at 4 weeks","Is expelled"],0,"medium"],
+["Which hormone is secreted by the corpus luteum?",["Relaxin","Insulin","Thyroxine","Adrenaline"],0,"medium"],
+["The main effect of relaxin mentioned in the lecture is:",["Contraction of pelvic joints","Relaxation of pelvic joints","Inhibition of fetal growth","Increase in ovulation"],1,"medium"],
+["The cessation of ovulation during pregnancy is related to:",["Pituitary inhibition","Increased FSH","Decreased progesterone","Low estrogen"],0,"medium"],
+["The weight of the uterus in pregnant woman is:",["20-30 gm","50-60 gm","500 gm","1000 gm"],3,"medium"],
+["The approximate total weight gain during pregnancy is:",["12 Kg","13 Kg","14 Kg","15 Kg"],0,"hard"],
+["The book gives the usual pregnancy weight gain as:",["4–6 kg","10–12 kg","15–18 kg","20–25 kg"],1,"medium"],
+["During the first trimester, expected weight gain is approximately:",["1–2 kg","6–7 kg","8–9 kg","10 kg"],0,"medium"],
+["During the second trimester, expected weight gain is approximately:",["1–2 kg","3–4 kg","6–7 kg","10–12 kg"],2,"medium"],
+["During the third trimester, expected weight gain is approximately:",["1–2 kg","3–4 kg","6–7 kg","8–9 kg"],1,"medium"],
+["Relief measures for nausea and vomiting include:",["Eat dry crackers or toast before rising in morning","Eat large, frequent meals","Perform sudden movements","Stay indoors to help relieve nausea"],0,"hard"],
+["Amniotic fluid increases during pregnancy and peaks around 34 weeks at:",["800 to 1,000 mL","500 to 600 mL","1,000 to 1,500 mL","1,500 to 2,000 mL"],0,"hard"]
+],
+[
+["Abortion is defined as loss of pregnancy before the fetus is:",["Fully developed","Viable or capable of living outside the uterus","30 weeks","40 weeks"],1,"easy"],
+["In the lecture, a fetus below which gestational age is considered not viable?",["12 weeks","16 weeks","20 weeks","28 weeks"],2,"easy"],
+["Which of the following is a risk factor for miscarriage according to the book?",["Drinking enough water","Smoking more than 10 cigarettes per day","Regular antenatal care","Adequate nutrition"],1,"easy"],
+["The most common fetal cause of abortion is:",["Chromosomal anomalies","Chronic nephritis","Uterine malformation","Incompetent cervix"],0,"easy"],
+["In threatened abortion, the cervical os is usually:",["Closed","Open","Completely dilated","Not present"],0,"easy"],
+["The bleeding in threatened abortion is usually:",["Heavy bleeding with clots","Spotting","No bleeding","Offensive discharge"],1,"easy"],
+["In inevitable abortion, the cervical os is:",["Closed","Dilated","Always absent","Not examined"],1,"easy"],
+["Incomplete abortion means:",["All products are expelled","Some products are expelled while others remain","Fetus remains without bleeding","Pregnancy continues normally"],1,"easy"],
+["Complete abortion occurs when:",["Some products remain inside the uterus","The fetus dies and remains in the uterus","All embryonic and placental components are expelled","The cervical os remains dilated"],2,"easy"],
+["Missed abortion occurs when:",["The fetus dies and remains in the uterus","All products are expelled","Infection always occurs","Pregnancy is ectopic"],0,"easy"],
+["Habitual abortion means:",["Two consecutive abortions","Three or more consecutive spontaneous abortions","One induced abortion","One complete abortion"],1,"medium"],
+["Septic abortion is defined as:",["Complete abortion","Incomplete abortion complicated by infection of uterine cavity","Threatened abortion","Missed abortion without infection"],1,"medium"],
+["An offensive vaginal discharge may indicate:",["Septic abortion","Threatened abortion only","Normal pregnancy","Positive pregnancy test"],0,"medium"],
+["The most common site of ectopic pregnancy is:",["Ampulla","Isthmus","Fimbriae","Ovary"],0,"easy"],
+["Approximately what percentage of ectopic pregnancies occur in the fallopian tube?",["20–30%","50–60%","75–80%","95–97%"],3,"medium"],
+["Ectopic pregnancy is defined as implantation of the fertilized ovum:",["Inside the uterine cavity","Outside the uterine cavity","Inside the endometrium","Inside the placenta"],1,"easy"],
+["Which of the following is a cause of ectopic pregnancy?",["Occlusion of fallopian tube","Impaired tubal ciliary action","Impaired tubal contractility","All of the above"],3,"medium"],
+["A classic symptom of ectopic pregnancy is:",["Painless bilateral leg swelling","Severe recurrent or colicky abdominal pain","Increased fetal movement","Severe heartburn only"],1,"medium"],
+["Rupture of an ectopic pregnancy may lead to:",["Internal bleeding and shock","Improved circulation","Normal labor","Polyhydramnios"],0,"medium"],
+["The common surgical options for ectopic pregnancy include:",["Laparotomy and laparoscopy","Cesarean section only","Hysteroscopy only","Amniocentesis"],0,"hard"]
+]
+];
+
+/* True / False: السؤال، الإجابة الصحيحة، المستوى (مصصح حسب المنهج) */
+const tf=[
+[
+["Positive signs of pregnancy are completely objective and offer conclusive proof of pregnancy.",true,"easy"],
+["X-ray is preferred over ultrasonography for diagnosing pregnancy.",false,"easy"],
+["The normal fetal heart rate is 120-160 beats/minute.",true,"easy"],
+["Amenorrhea is a positive sign of pregnancy.",false,"easy"],
+["Chadwick's sign is a purple discoloration of vaginal mucosa.",true,"easy"],
+["Goodell's sign means softening of the cervix.",true,"easy"],
+["A nulligravida has never been pregnant.",true,"easy"],
+["Gravidity means the number of pregnancies.",true,"easy"],
+["Parity counts the number of fetuses rather than births.",false,"medium"],
+["Preterm means before 37 completed weeks of gestation.",true,"easy"],
+["Post-term means after 42 weeks of gestation.",true,"easy"],
+["A primigravida is pregnant for the first time.",true,"easy"],
+["Fetal heart rate is a positive sign of pregnancy.",true,"easy"],
+["Nausea and vomiting are positive signs of pregnancy.",false,"easy"],
+["Ultrasonography is a positive sign of pregnancy.",true,"medium"],
+["Fetal parts can be palpated by the obstetrician at approximately 20 weeks.",true,"medium"],
+["X-ray can demonstrate the fetal skeleton from approximately 16 weeks.",true,"medium"],
+["The first morning urine is recommended for a urine pregnancy test.",true,"medium"],
+["Use of Naegele's rule requires that the woman have a regular 28-day menstrual cycle.",true,"medium"],
+["Probable signs of pregnancy are changes felt by the woman.",false,"hard"]
+],
+[
+["Physiological changes during pregnancy affect every organ system in the body.",true,"easy"],
+["Both ovaries may enlarge due to increased vascularity and edema.",true,"easy"],
+["The corpus luteum starts to degenerate after 10 weeks.",true,"easy"],
+["The corpus luteum secretes estrogen, progesterone, and relaxin.",true,"easy"],
+["Relaxin helps to relax the symphysis pubis and other pelvic joints.",true,"easy"],
+["Ovulation ceases during pregnancy due to pituitary inhibition caused by high estrogen and progesterone.",true,"easy"],
+["High estrogen and progesterone inhibit pituitary activity.",true,"medium"],
+["During pregnancy, the ovaries stop producing ovum.",true,"easy"],
+["The corpus luteum continues its activity without degeneration throughout pregnancy.",false,"medium"],
+["Pregnancy changes begin after conception.",true,"easy"],
+["Pregnancy is associated with hormonal changes.",true,"easy"],
+["The book states that normal pregnancy weight gain is about 10–12 kg.",true,"medium"],
+["The first trimester weight gain is about 1–2 kg.",true,"medium"],
+["The second trimester weight gain is about 6–7 kg.",true,"medium"],
+["The third trimester weight gain is about 3–4 kg.",true,"medium"],
+["Mild walking may be an appropriate form of exercise during pregnancy.",true,"medium"],
+["Unnecessary drugs should be avoided during pregnancy.",true,"medium"],
+["Smoking during pregnancy may lead to fetal anoxia and low birth weight.",true,"hard"],
+["Showers are preferable over tub baths according to the book.",true,"hard"],
+["Dry crackers or toast before rising may help morning nausea.",true,"hard"]
+],
+[
+["Vaginal bleeding during pregnancy is always normal.",false,"easy"],
+["The lecture identifies abortion, ectopic pregnancy and hydatidiform mole as causes of early bleeding.",true,"easy"],
+["Abortion is loss of pregnancy before the fetus is viable.",true,"easy"],
+["Smoking more than 10 cigarettes a day increases the risk of miscarriage.",true,"easy"],
+["Fever of 37.5°C or more may increase miscarriage risk.",true,"medium"],
+["In threatened abortion, the cervical os is usually closed.",true,"easy"],
+["In inevitable abortion, the cervical os is usually closed.",false,"easy"],
+["In incomplete abortion, some products of conception remain inside the uterus.",true,"easy"],
+["In complete abortion, all products of conception are expelled.",true,"easy"],
+["Missed abortion occurs when the fetus dies and remains in the uterus.",true,"easy"],
+["Habitual abortion means three or more consecutive spontaneous abortions.",true,"medium"],
+["Septic abortion is associated with infection.",true,"easy"],
+["Offensive vaginal bleeding may occur in septic abortion.",true,"medium"],
+["Ectopic pregnancy means implantation outside the uterine cavity.",true,"easy"],
+["Most ectopic pregnancies occur in the fallopian tube.",true,"easy"],
+["The ampulla is the most common site of tubal ectopic pregnancy.",true,"easy"],
+["Occlusion of the fallopian tube is a cause of ectopic pregnancy.",true,"medium"],
+["Ectopic pregnancy may cause severe pain in one iliac fossa.",true,"medium"],
+["Ruptured of the fallopian tube may cause internal bleeding and shock.",true,"medium"],
+["Hydatidiform mole is characterized by abnormal proliferation and edema of chorionic villi.",true,"hard"]
+]
+];
+
+let questions=[],answers=[],index=0;
+function startExam(){
+ const lec=document.getElementById("lecture").value;
+ const dif=document.getElementById("difficulty").value;
+ questions=[];
+ const selected=lec==="all"?[0,1,2]:[Number(lec)];
+ selected.forEach(i=>{
+  mcq[i].forEach((q,n)=>{if(dif==="all"||q[3]===dif)questions.push({lecture:lectures[i],kind:"MCQ",q:q[0],opts:q[1],correct:q[2]})});
+  tf[i].forEach((q,n)=>{if(dif==="all"||q[2]===dif)questions.push({lecture:lectures[i],kind:"True / False",q:q[0],opts:["True","False"],correct:q[1]?0:1})});
+ });
+ answers=Array(questions.length).fill(null);index=0;
+ document.getElementById("setup").classList.add("hidden");
+ document.getElementById("result").classList.add("hidden");
+ document.getElementById("exam").classList.remove("hidden");
+ render();
+}
+function render(){
+ const q=questions[index];
+ document.getElementById("lectureName").textContent=q.lecture;
+ document.getElementById("counter").textContent=`Question ${index+1} / ${questions.length}`;
+ document.getElementById("type").textContent=q.kind;
+ document.getElementById("question").textContent=q.q;
+ document.getElementById("bar").style.width=((index+1)/questions.length*100)+"%";
+ const box=document.getElementById("choices");box.innerHTML="";
+ q.opts.forEach((opt,i)=>{
+  const div=document.createElement("label");
+  div.className="choice"+(answers[index]===i?" selected":"");
+  div.innerHTML=`<input type="radio" name="answer" ${answers[index]===i?"checked":""}> <span></span>`;
+  div.querySelector("span").textContent=opt;
+  div.onclick=()=>{answers[index]=i;render()};
+  box.appendChild(div);
+ });
+ document.getElementById("prev").disabled=index===0;
+ document.getElementById("next").disabled=index===questions.length-1;
+ const nav=document.getElementById("nav");nav.innerHTML="";
+ questions.forEach((_,i)=>{
+  const b=document.createElement("button");b.textContent=i+1;
+  if(answers[i]!==null)b.classList.add("answered");
+  if(i===index)b.classList.add("current");
+  b.onclick=()=>{index=i;render()};nav.appendChild(b);
+ });
+}
+function move(n){index=Math.max(0,Math.min(questions.length-1,index+n));render()}
+function finishExam(){
+ const unanswered=answers.filter(a=>a===null).length;
+ const correct=questions.filter((q,i)=>answers[i]===q.correct).length;
+ const wrong=questions.length-correct-unanswered;
+ const percent=Math.round(correct/questions.length*100);
+ document.getElementById("exam").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+ document.getElementById("score").textContent=`${correct} / ${questions.length}`;
+ document.getElementById("stats").textContent=`النسبة: ${percent}% | صحيح: ${correct} | خطأ: ${wrong} | بدون إجابة: ${unanswered}`;
+ const reviews=document.getElementById("reviews");reviews.innerHTML="";
+ questions.forEach((q,i)=>{
+  const div=document.createElement("div");div.className="review";
+  const student=answers[i]===null?"لم تتم الإجابة":q.opts[answers[i]];
+  const right=q.opts[q.correct];
+  const ok=answers[i]===q.correct;
+  div.innerHTML=`<div class="small">${q.lecture} · ${q.kind} · Question ${i+1}</div><p dir="ltr">${q.q}</p><p class="${ok?"correct":"wrong"}">Your answer: ${student}</p><p class="correct">Correct answer: ${right}</p>`;
+  reviews.appendChild(div);
+ });
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
